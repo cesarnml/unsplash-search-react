@@ -15,7 +15,7 @@ class App extends Component {
 
   componentDidMount () {
     axios
-      .get(`${url}/?client_id=${clientId}&query=plants%20${this.state.search}`)
+      .get(`${url}/?client_id=${clientId}&query=${this.state.search}`)
       .then(({ data }) => this.setState({ photos: data.results }))
   }
 
@@ -30,12 +30,13 @@ class App extends Component {
 
     axios
       .get(`${url}/?client_id=${clientId}&query=plants%20${this.state.search}`)
-      .then(({ data }) => this.setState({ photos: data.results }))
+      .then(({ data }) => this.setState({ photos: data.results, search: '' }))
   }
 
   handleClick = (e) => {
     this.setState({
-      selected: e.target.src
+      selected: e.target.src,
+      photos: []
     })
   }
 
@@ -43,8 +44,15 @@ class App extends Component {
     return (
       <div className='App'>
         <div>
-        <h4>Selected Image</h4>
-          {this.state.selected && <img height='300' width='300' style={{ border: `2px solid hotpink` }} src={this.state.selected} />}
+          <h4>Selected Image</h4>
+          {this.state.selected && (
+            <img
+              height='300'
+              width='300'
+              style={{ border: `2px solid hotpink` }}
+              src={this.state.selected}
+            />
+          )}
         </div>
         <form onSubmit={this.handleSubmit}>
           <input
