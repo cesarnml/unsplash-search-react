@@ -29,7 +29,7 @@ class App extends Component {
     e.preventDefault()
 
     axios
-      .get(`${url}/?client_id=${clientId}&query=plants%20${this.state.search}`)
+      .get(`${url}/?client_id=${clientId}&query=${this.state.search}`)
       .then(({ data }) => this.setState({ photos: data.results, search: '' }))
   }
 
